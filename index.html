@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUTOZONE | قیمت روز خودرو</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0b0e;color:white;font-family:Tahoma,Arial}
+header{background:#17171d;padding:25px 15px;text-align:center;border-bottom:2px solid #e63946}
+header h1{color:#ff3545;font-size:32px;margin:0}
+header p{color:#bbb}
+main{max-width:850px;margin:25px auto;padding:15px}
+input,select{width:100%;padding:14px;margin:8px 0;border-radius:9px;border:1px solid #444;background:#191920;color:white;font-size:16px}
+h2{color:#ff4655}
+.car{background:#191920;border:1px solid #333;border-radius:12px;padding:18px;margin:15px 0}
+.car h3{font-size:20px;margin-top:0}
+.price{color:#ff4655;font-size:21px;font-weight:bold}
+.note{font-size:12px;color:#aaa}
+footer{text-align:center;padding:25px;color:#888}
+</style>
+</head>
+<body>
+<header>
+<h1>AUTOZONE 🚘</h1>
+<p>مرجع قیمت خودروهای ایران</p>
+</header>
+<main>
+<h2>🔎 جست‌وجوی خودرو</h2>
+<input id="search" placeholder="نام خودرو را بنویس..." oninput="showCars()">
+<select id="type" onchange="showCars()">
+<option value="all">همه خودروها</option>
+<option value="iran">خودروهای ایرانی</option>
+<option value="foreign">خودروهای خارجی</option>
+</select>
+<div id="cars"></div>
+<p class="note">⚠️ قیمت‌های این نسخه آزمایشی هستند و قیمت واقعی بازار نیستند.</p>
+</main>
+<footer>© AUTOZONE | بازار خودرو</footer>
+<script>
+const data=[
+{name:"پژو ۲۰۷",price:"۹۰۰ میلیون تومان",type:"iran"},
+{name:"دنا پلاس",price:"۱ میلیارد تومان",type:"iran"},
+{name:"تارا اتوماتیک",price:"۱ میلیارد تومان",type:"iran"},
+{name:"سورن پلاس",price:"۸۰۰ میلیون تومان",type:"iran"},
+{name:"پژو ۴۰۵",price:"قیمت نیازمند بررسی",type:"iran"},
+{name:"تویوتا لندکروزر",price:"قیمت نیازمند بررسی",type:"foreign"},
+{name:"BMW سری ۵",price:"قیمت نیازمند بررسی",type:"foreign"},
+{name:"مرسدس بنز",price:"قیمت نیازمند بررسی",type:"foreign"}
+];
+function showCars(){
+let s=document.getElementById("search").value.trim().toLowerCase();
+let t=document.getElementById("type").value;
+document.getElementById("cars").innerHTML=data.filter(c=>
+c.name.toLowerCase().includes(s)&&(t==="all"||c.type===t)
+).map(c=>`<div class="car"><h3>🚘 ${c.name}</h3><div class="price">${c.price}</div></div>`).join("")||"<p>خودرویی پیدا نشد.</p>";
+}
+showCars();
+</script>
+</body>
+</html>
