@@ -2,60 +2,599 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AUTOZONE | قیمت روز خودرو</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
+
+<title>AUTOZONE | مرجع قیمت خودرو</title>
+
+<meta name="description" content="مشاهده و جست‌وجوی قیمت خودروهای ایرانی و خارجی در AUTOZONE">
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0b0b0e;color:white;font-family:Tahoma,Arial}
-header{background:#17171d;padding:25px 15px;text-align:center;border-bottom:2px solid #e63946}
-header h1{color:#ff3545;font-size:32px;margin:0}
-header p{color:#bbb}
-main{max-width:850px;margin:25px auto;padding:15px}
-input,select{width:100%;padding:14px;margin:8px 0;border-radius:9px;border:1px solid #444;background:#191920;color:white;font-size:16px}
-h2{color:#ff4655}
-.car{background:#191920;border:1px solid #333;border-radius:12px;padding:18px;margin:15px 0}
-.car h3{font-size:20px;margin-top:0}
-.price{color:#ff4655;font-size:21px;font-weight:bold}
-.note{font-size:12px;color:#aaa}
-footer{text-align:center;padding:25px;color:#888}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #ff3045;
+  --bg: #08090d;
+  --card: #13151d;
+  --text: #f5f5f7;
+  --muted: #9699a8;
+}
+
+body {
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.9;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  background: #0d0e14;
+  border-bottom: 1px solid #292b35;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav {
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+.nav small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hero {
+  padding: 55px 20px 35px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, #351018 0%, #08090d 65%);
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid #55232c;
+  background: #201015;
+  color: #ff8190;
+  padding: 5px 13px;
+  border-radius: 30px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: clamp(27px, 6vw, 45px);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.hero h1 span {
+  color: var(--red);
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 550px;
+  margin: auto;
+  font-size: 14px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.stat {
+  background: #15151d;
+  border: 1px solid #292b35;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.stat strong {
+  color: var(--red);
+  font-size: 17px;
+  display: block;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px 18px 50px;
+}
+
+.section-title {
+  font-size: 21px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  min-width: 0;
+  background: #141620;
+  border: 1px solid #30323e;
+  border-radius: 10px;
+  padding: 14px 12px;
+  color: white;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--red);
+}
+
+input::placeholder {
+  color: #858796;
+}
+
+.search {
+  grid-column: 1 / -1;
+}
+
+select option {
+  background: #141620;
+}
+
+.results {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.cars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.car {
+  background: var(--card);
+  border: 1px solid #292b36;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.car:hover {
+  transform: translateY(-4px);
+  border-color: #87303b;
+}
+
+.car-top {
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #211018, #151720);
+  border-bottom: 1px solid #292b36;
+}
+
+.car-icon {
+  font-size: 48px;
+  filter: drop-shadow(0 5px 12px #000);
+}
+
+.car-body {
+  padding: 15px;
+}
+
+.car h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.tag {
+  display: inline-block;
+  background: #24202a;
+  color: #ff9aa5;
+  border-radius: 6px;
+  font-size: 10px;
+  padding: 2px 8px;
+  margin-bottom: 13px;
+}
+
+.price-label {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.price {
+  color: var(--red);
+  font-size: 18px;
+  font-weight: bold;
+  margin: 3px 0 12px;
+  overflow-wrap: anywhere;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  border-top: 1px solid #292b36;
+  padding-top: 10px;
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  padding: 40px 15px;
+  background: var(--card);
+  border-radius: 12px;
+  color: var(--muted);
+}
+
+.notice {
+  margin-top: 25px;
+  padding: 15px;
+  background: #17151a;
+  border: 1px solid #46303a;
+  border-radius: 12px;
+  color: #c9b7bc;
+  font-size: 12px;
+}
+
+.notice strong {
+  color: #ff8190;
+}
+
+footer {
+  background: #0d0e14;
+  border-top: 1px solid #292b35;
+  text-align: center;
+  padding: 25px 15px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer strong {
+  color: var(--red);
+}
+
+@media (max-width: 750px) {
+  .cars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .car-body {
+    padding: 12px;
+  }
+
+  .car h3 {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .cars {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .search {
+    grid-column: auto;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>AUTOZONE 🚘</h1>
-<p>مرجع قیمت خودروهای ایران</p>
+  <div class="nav">
+    <a class="logo" href="#">AUTO<span>ZONE</span></a>
+    <small>مرجع بررسی قیمت خودرو</small>
+  </div>
 </header>
-<main>
-<h2>🔎 جست‌وجوی خودرو</h2>
-<input id="search" placeholder="نام خودرو را بنویس..." oninput="showCars()">
-<select id="type" onchange="showCars()">
-<option value="all">همه خودروها</option>
-<option value="iran">خودروهای ایرانی</option>
-<option value="foreign">خودروهای خارجی</option>
-</select>
-<div id="cars"></div>
-<p class="note">⚠️ قیمت‌های این نسخه آزمایشی هستند و قیمت واقعی بازار نیستند.</p>
+
+<section class="hero">
+  <div class="badge">🚘 دنیای خودرو در یک نگاه</div>
+
+  <h1>
+    قیمت خودروها را<br>
+    در <span>AUTOZONE</span> پیدا کن
+  </h1>
+
+  <p>
+    جست‌وجو و مقایسه خودروهای ایرانی و خارجی،
+    ساده و سریع.
+  </p>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="carCount">۰</strong>
+      خودروی نمونه
+    </div>
+
+    <div class="stat">
+      <strong>۲۴/۷</strong>
+      دسترسی به سایت
+    </div>
+  </div>
+</section>
+
+<main class="container">
+
+  <h2 class="section-title">🔥 فهرست خودروها</h2>
+
+  <p class="subtitle">
+    نام خودرو را جست‌وجو کن یا برند و دسته‌بندی را انتخاب کن.
+  </p>
+
+  <div class="controls">
+
+    <input
+      id="search"
+      class="search"
+      type="search"
+      placeholder="🔍 جست‌وجوی خودرو؛ مثلاً دنا پلاس"
+      aria-label="جست‌وجوی خودرو"
+    >
+
+    <select id="brand" aria-label="انتخاب برند">
+      <option value="">همه برندها</option>
+      <option value="ایران خودرو">ایران خودرو</option>
+      <option value="سایپا">سایپا</option>
+      <option value="مدیران خودرو">مدیران خودرو</option>
+      <option value="بهمن موتور">بهمن موتور</option>
+      <option value="هیوندای">هیوندای</option>
+      <option value="تویوتا">تویوتا</option>
+      <option value="بی‌ام‌و">بی‌ام‌و</option>
+      <option value="مرسدس بنز">مرسدس بنز</option>
+    </select>
+
+    <select id="category" aria-label="دسته‌بندی خودرو">
+      <option value="">همه دسته‌ها</option>
+      <option value="داخلی">خودروهای داخلی</option>
+      <option value="خارجی">خودروهای خارجی</option>
+      <option value="شاسی‌بلند">شاسی‌بلند</option>
+      <option value="سدان">سدان</option>
+    </select>
+
+  </div>
+
+  <div class="results" id="results"></div>
+
+  <div class="cars" id="cars"></div>
+
+  <div class="empty" id="empty">
+    <div style="font-size:35px">🚗</div>
+    خودرویی پیدا نشد!<br>
+    نام دیگری را جست‌وجو کن.
+  </div>
+
+  <div class="notice">
+    <strong>⚠️ توجه:</strong>
+    قیمت‌های فعلی این سایت صرفاً نمونه و آزمایشی هستند.
+    این اعداد قیمت تأییدشده بازار نیستند و نباید مبنای خرید قرار بگیرند.
+    برای نمایش قیمت روز، باید داده‌های معتبر به سایت متصل شوند.
+  </div>
+
 </main>
-<footer>© AUTOZONE | بازار خودرو</footer>
+
+<footer>
+  <div class="logo">AUTO<span>ZONE</span></div>
+  <p>دنیای خودرو، یک قدم جلوتر 🚘</p>
+  <p>© 2026 AUTOZONE</p>
+</footer>
+
 <script>
-const data=[
-{name:"پژو ۲۰۷",price:"۹۰۰ میلیون تومان",type:"iran"},
-{name:"دنا پلاس",price:"۱ میلیارد تومان",type:"iran"},
-{name:"تارا اتوماتیک",price:"۱ میلیارد تومان",type:"iran"},
-{name:"سورن پلاس",price:"۸۰۰ میلیون تومان",type:"iran"},
-{name:"پژو ۴۰۵",price:"قیمت نیازمند بررسی",type:"iran"},
-{name:"تویوتا لندکروزر",price:"قیمت نیازمند بررسی",type:"foreign"},
-{name:"BMW سری ۵",price:"قیمت نیازمند بررسی",type:"foreign"},
-{name:"مرسدس بنز",price:"قیمت نیازمند بررسی",type:"foreign"}
+const cars = [
+  {
+    name: "دنا پلاس توربو اتوماتیک",
+    brand: "ایران خودرو",
+    category: ["داخلی", "سدان"],
+    price: 1500000000,
+    icon: "🚘"
+  },
+  {
+    name: "تارا اتوماتیک",
+    brand: "ایران خودرو",
+    category: ["داخلی", "سدان"],
+    price: 1300000000,
+    icon: "🚗"
+  },
+  {
+    name: "سورن پلاس",
+    brand: "ایران خودرو",
+    category: ["داخلی", "سدان"],
+    price: 950000000,
+    icon: "🚙"
+  },
+  {
+    name: "پژو ۲۰۷ اتوماتیک",
+    brand: "ایران خودرو",
+    category: ["داخلی", "سدان"],
+    price: 1200000000,
+    icon: "🚗"
+  },
+  {
+    name: "شاهین اتوماتیک",
+    brand: "سایپا",
+    category: ["داخلی", "سدان"],
+    price: 1100000000,
+    icon: "🚘"
+  },
+  {
+    name: "کوییک",
+    brand: "سایپا",
+    category: ["داخلی"],
+    price: 600000000,
+    icon: "🚗"
+  },
+  {
+    name: "تیگو ۸ پرو",
+    brand: "مدیران خودرو",
+    category: ["خارجی", "شاسی‌بلند"],
+    price: 3500000000,
+    icon: "🚙"
+  },
+  {
+    name: "دیگنیتی پرایم",
+    brand: "بهمن موتور",
+    category: ["داخلی", "شاسی‌بلند"],
+    price: 2200000000,
+    icon: "🚙"
+  },
+  {
+    name: "هیوندای توسان",
+    brand: "هیوندای",
+    category: ["خارجی", "شاسی‌بلند"],
+    price: 4000000000,
+    icon: "🚙"
+  },
+  {
+    name: "تویوتا کمری",
+    brand: "تویوتا",
+    category: ["خارجی", "سدان"],
+    price: 5000000000,
+    icon: "🚘"
+  },
+  {
+    name: "تویوتا لندکروزر",
+    brand: "تویوتا",
+    category: ["خارجی", "شاسی‌بلند"],
+    price: 15000000000,
+    icon: "🚙"
+  },
+  {
+    name: "بی‌ام‌و سری ۵",
+    brand: "بی‌ام‌و",
+    category: ["خارجی", "سدان"],
+    price: 9000000000,
+    icon: "🏎️"
+  },
+  {
+    name: "مرسدس بنز کلاس C",
+    brand: "مرسدس بنز",
+    category: ["خارجی", "سدان"],
+    price: 8500000000,
+    icon: "🚘"
+  }
 ];
-function showCars(){
-let s=document.getElementById("search").value.trim().toLowerCase();
-let t=document.getElementById("type").value;
-document.getElementById("cars").innerHTML=data.filter(c=>
-c.name.toLowerCase().includes(s)&&(t==="all"||c.type===t)
-).map(c=>`<div class="car"><h3>🚘 ${c.name}</h3><div class="price">${c.price}</div></div>`).join("")||"<p>خودرویی پیدا نشد.</p>";
+
+const search = document.getElementById("search");
+const brand = document.getElementById("brand");
+const category = document.getElementById("category");
+const carsBox = document.getElementById("cars");
+const empty = document.getElementById("empty");
+const results = document.getElementById("results");
+
+function formatPrice(price) {
+  return new Intl.NumberFormat("fa-IR").format(price);
 }
-showCars();
+
+function renderCars() {
+  const query = search.value.trim().toLowerCase();
+
+  const filtered = cars.filter(car => {
+    const matchesName =
+      car.name.toLowerCase().includes(query) ||
+      car.brand.toLowerCase().includes(query);
+
+    const matchesBrand =
+      !brand.value || car.brand === brand.value;
+
+    const matchesCategory =
+      !category.value || car.category.includes(category.value);
+
+    return matchesName && matchesBrand && matchesCategory;
+  });
+
+  carsBox.innerHTML = filtered.map(car => `
+    <article class="car">
+      <div class="car-top">
+        <span class="car-icon">${car.icon}</span>
+      </div>
+
+      <div class="car-body">
+        <h3>${car.name}</h3>
+
+        <span class="tag">${car.brand}</span>
+
+        <div class="price-label">قیمت نمونه</div>
+
+        <div class="price">
+          ${formatPrice(car.price)}
+          <span style="font-size:11px">تومان</span>
+        </div>
+
+        <div class="details">
+          <span>${car.category[0]}</span>
+          <span>${car.category[1] || "خودرو"}</span>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  results.textContent =
+    `تعداد خودروهای پیدا شده: ${formatPrice(filtered.length)}`;
+
+  empty.style.display = filtered.length ? "none" : "block";
+}
+
+document.getElementById("carCount").textContent =
+  formatPrice(cars.length);
+
+search.addEventListener("input", renderCars);
+brand.addEventListener("change", renderCars);
+category.addEventListener("change", renderCars);
+
+renderCars();
 </script>
+
 </body>
 </html>
